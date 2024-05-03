@@ -1,0 +1,10 @@
+SELECT * FROM Article; to view table 
+
+to insert data into tables
+INSERT INTO Article (Titre, Contenu, Date_publication, ID_utilisateur, ID_categorie) VALUES ('Nouvel article', 'Contenu du nouvel article', '2024-04-30', 1, 1);
+
+to update table data 
+UPDATE Article SET Titre = 'Nouveau titre' WHERE ID_article = 1;
+
+to delete data from table
+DELETE FROM Commentaire WHERE ID_commentaire = 1;

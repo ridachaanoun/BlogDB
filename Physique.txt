@@ -1,0 +1,78 @@
+CREATE TABLE Role (
+    ID_role integer PRIMARY KEY AUTOINCREMENT,
+    role_name VARCHAR(50)
+
+);
+
+CREATE TABLE User (
+    ID_user integer PRIMARY KEY AUTOINCREMENT,
+    username VARCHAR(50) NOT NULL,
+    Email varchar(255) NOT NULL,
+    pass_word varchar(50) NOT NULL,	
+	ID_role INTEGER,
+    FOREIGN KEY (ID_role) REFERENCES Role(ID_role)
+);	
+
+CREATE TABLE Category (
+    ID_Category integer PRIMARY KEY AUTOINCREMENT,
+    Categoryname VARCHAR(50),
+	ID_sapCategory INTEGER,
+    FOREIGN KEY (ID_sapCategory) REFERENCES Category(ID_Category)
+);
+
+CREATE TABLE Articles (
+    ID_arti INTEGER PRIMARY KEY autoincrement,
+    Titre varchar(255),
+    Contenu_arti TEXT,
+    Date_created DATE,
+    ID_user INTEGER,
+    ID_Category INTEGER,
+    FOREIGN KEY (ID_user) REFERENCES User(ID_user),
+    FOREIGN KEY (ID_Category) REFERENCES Category(ID_Category)
+);
+
+CREATE TABLE Comment (
+    ID_comment INTEGER PRIMARY KEY autoincrement,
+    Contenu_com TEXT NOT NULL,
+    Date_created_com DATE,
+    ID_user INTEGER  NOT NULL,
+    ID_arti INTEGER  NOT NULL,
+    FOREIGN KEY (ID_user) REFERENCES User(ID_user),
+    FOREIGN KEY (ID_arti) REFERENCES Articles(ID_arti)
+);
+INSERT INTO Role (role_name)VALUES
+	('admin'),
+	('user');
+
+INSERT INTO User (username, Email, pass_word, ID_role) VALUES
+    ('admin', 'admin@example.com', 'admin123', 1),
+    ('User1', 'user1@example.com', 'password1', 2),
+    ('User2', 'user2@example.com', 'password2', 2),
+    ('User3', 'user3@example.com', 'password3', 2),
+    ('User4', 'user4@example.com', 'password4', 2);
+
+INSERT INTO Category (Categoryname) VALUES
+    ('Technologie'),
+    ('Science'),
+    ('Art'),
+    ('Voyages'),
+    ('Cuisine');
+	
+	INSERT INTO Category (Categoryname, ID_sapCategory ) VALUES
+    ('art children', 3);
+	
+INSERT INTO Articles (Titre, Contenu_arti, Date_created, ID_user, ID_Category) VALUES
+    ('Premier article', 'Contenu du premier article', '2024-04-30', 1, 1),
+    ('Deuxième article', 'Contenu du deuxième article', '2024-04-29', 2, 2),
+    ('Troisième article', 'Contenu du troisième article', '2024-04-28', 3, 3),
+    ('Quatrième article', 'Contenu du quatrième article', '2024-04-27', 4, 4),
+    ('Cinquième article', 'Contenu du cinquième article', '2024-04-26', 5, 5);
+	
+INSERT INTO Comment (Contenu_com, Date_created_com, ID_user, ID_arti) VALUES
+    ('Great job on the blog design! Looking forward to reading more articles', '2024-04-30', 2, 1),
+    ('I found the content very informative. Keep up the good work', '2024-04-29', 3, 2),
+    ('I appreciate the variety of topics covered in your blog. It is refreshing!', '2024-04-28', 4, 3),
+    ('The writing style is engaging and easy to follow. Thumbs up!', '2024-04-27', 5, 4),
+    ('As a newcomer to your blog, I am impressed by the quality of your articles. Well done!', '2024-04-26', 1, 5);
+
+	DROP TABLE Comment ;
